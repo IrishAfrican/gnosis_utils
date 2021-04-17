@@ -1,3 +1,11 @@
+Updated to work with Python 3 by running through 2to3 and fixing types and some other minor changes.
+No guarantees this will work as I have only made these changes as I need this to work for something that is supplemental to what I am going.
+
+You will need to rebuild using "python setup.py install" and any references to Python 1 or 2 are probably obsolete
+
+I cannot find a License file but all credit to original Authors!
+
+---
 
 Gnosis Utilities contains several subpackages for working with XML,
 as well as other generally useful tools. The major modules are:
@@ -20,12 +28,6 @@ Installation (*):
 
    python setup.py install
 
-   | Shortcut: (**)
-   |   If you have multiple versions of Python installed, you can
-   |   install for all of them at one time by using:
-   |
-   |     python setup.py install_all
-
 Trying it out:
 
    cd gnosis/xml/pickle/test
@@ -45,18 +47,6 @@ For more info, e.g.:
 
 ---
 
-(*) If you are using Python 2.0, you must first install
-a newer version of PyXML.
-
-   See:
-      http://pyxml.sourceforge.net/topics/download.html
-
-   NOTE: If you are using Python 1.5 or 1.6, you must install version
-   0.7.x of PyXML; versions 0.8 and up dropped support for 1.5 and 1.6.
-   There are currently issues with running portions of Gnosis with
-   Python < 2.0. Patches are accepted, if minimally intrusive.
-
- You don't have to do anything for Python 2.1 and up.
 
 (**) If "install_all" fails to detect all versions of Python
 that you have installed, please email frankm@hiwaay.net with
