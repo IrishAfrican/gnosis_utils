@@ -1,6 +1,8 @@
 
 import gnosis.xml.pickle as xml_pickle
-import Numeric,array
+import numpy as np
+import array
+#import Numeric,array
 from . import funcs
 
 funcs.set_parser()
@@ -9,12 +11,12 @@ class foo: pass
 
 f = foo()
 
-f.a = Numeric.array([[1,2,3,4],[5,6,7,8]])
-f.b = Numeric.array([1.2,2.3,3.4,4.5])
+f.a = np.array([[1,2,3,4],[5,6,7,8]])
+f.b = np.array([1.2,2.3,3.4,4.5])
 f.y = array.array('b',[1,2,3,4])
 f.z = array.array('f',[1,2,3,4])
 
-a = Numeric.array([6,7,8,9])
+a = np.array([6,7,8,9])
 
 def testfoo(o1,o2):
     for attr in ['a','b','y','z',
@@ -26,7 +28,7 @@ def testfoo(o1,o2):
 # make sure refs work
 f.l = [a,a,a]
 
-f.d = {'One':a,'Two':Numeric.array([10,11,12])}
+f.d = {'One':a,'Two':np.array([10,11,12])}
 f.e = f.d['Two']
 
 #print f.a, f.b, f.y,f.z,f.l,f.d,f.e

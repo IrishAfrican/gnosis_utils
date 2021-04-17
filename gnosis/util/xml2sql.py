@@ -75,7 +75,7 @@ def walkNodes(py_obj, parent_info=('',''), seq=0):
            continue             # ExpatFactory uses bookeeping attribute
 
         member = getattr(py_obj,colname)
-        if type(member) == InstanceType:
+        if type(member) == object:
             walkNodes(member, self_info)
         elif type(member) == list:
             for memitem in member:

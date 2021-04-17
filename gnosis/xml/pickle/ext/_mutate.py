@@ -47,7 +47,7 @@ def get_mutator(obj):
     # class, yet cannot serve as a base class (they can only be True or
     # False). Therefore, there will never be a need for a mutator, and
     # they can be completely handled in the main "if" block in _pickle.py.
-    if Have_BoolClass and type(obj) is BooleanType:
+    if Have_BoolClass and type(obj) is bool:
          return None		
     
     if not hasattr(obj,'__class__'):

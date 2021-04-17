@@ -227,7 +227,8 @@ mutate.remove_mutator(my1)
 
 # skip test 5 if Numeric not installed
 try:
-    import Numeric
+    import numpy as np
+    #import Numeric
 except:
     sys.exit(0)
 
@@ -261,7 +262,7 @@ class mutate_multidim(XMLP_Mutator):
             if len(a):
                 list.append(a)
 
-        a = Numeric.array(list)
+        a = np.array(list)
         return a
 
     
@@ -270,7 +271,7 @@ mutate.add_mutator(my1)
 
 f = foo()
 
-f.a = Numeric.array([[1,2,3,4],[5,6,7,8],[9,10,11,12]],'f')
+f.a = np.array([[1,2,3,4],[5,6,7,8],[9,10,11,12]],'f')
 
 print("ORIG: ",f.a)
 

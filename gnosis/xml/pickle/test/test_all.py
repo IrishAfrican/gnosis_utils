@@ -129,7 +129,8 @@ except:
 
 # if Numeric installed, add numpy test
 try:
-    import Numeric
+    #import Numeric
+    import numpy as np
     tests.append('test_numpy.py')
 except:
     pechof(tout,"** OMITTING test_numpy.py")

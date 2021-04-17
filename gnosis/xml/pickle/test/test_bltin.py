@@ -50,7 +50,7 @@ foo = foo_class()
 
 # try putting numeric content in body (doesn't matter which
 # numeric type)
-setInBody(ComplexType,1)
+setInBody(complex,1)
 
 # test both code paths
 

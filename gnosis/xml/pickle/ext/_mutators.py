@@ -60,7 +60,8 @@ _mutate.add_mutator(mutate_array())
 
 #-- Numeric.array --
 try:
-    import Numeric
+    #import Numeric
+    import numpy as np
     HAS_NUMERIC = 1
 except:
     HAS_NUMERIC = 0
@@ -69,7 +70,8 @@ class mutate_numpy(XMLP_Mutator):
 
     def __init__(self):
         # note, Numeric.ArrayType != array.ArrayType, which is good :-)
-        XMLP_Mutator.__init__(self,Numeric.ArrayType,'NumPy_array',0)
+        #XMLP_Mutator.__init__(self,Numeric.ArrayType,'NumPy_array',0)
+        XMLP_Mutator.__init__(self, type(np.array) ,'NumPy_array',0)
 
     def mutate(self,obj):
         list = []
@@ -78,7 +80,8 @@ class mutate_numpy(XMLP_Mutator):
         return XMLP_Mutated(list)
 
     def unmutate(self,mobj):
-        return Numeric.array(mobj.obj)
+        return np.array(mobj.obj)
+        #return Numeric.array(mobj.obj)
 
 if HAS_NUMERIC:
     _mutate.add_mutator(mutate_numpy())
@@ -176,7 +179,7 @@ def olddata_to_newdata(data,extra,paranoia):
     (module,klass) = extra.split()
     o = obj_from_name(klass,module,paranoia)
 
-    #if isinstance(o,ComplexType) and \
+    #if isinstance(o,complex) and \
     #	   type(data) in [bytes,str]:
     #	# yuck ... have to strip () from complex data before
     #	# passing to __init__ (ran into this also in one of the
@@ -184,7 +187,7 @@ def olddata_to_newdata(data,extra,paranoia):
     #	if data[0] == '(' and data[-1] == ')':
     #		data = data[1:-1]
 
-    if isinstance_any(o,(int,FloatType,ComplexType,int)) and \
+    if isinstance_any(o,(int,float,complex,int)) and \
                       type(data) in [bytes,str]:
         data = aton(data)
 

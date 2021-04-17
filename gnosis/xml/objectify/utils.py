@@ -115,7 +115,7 @@ def pyobj_printer(py_obj, level=0):
             if membname in ("__parent__", "_seq"):
                continue             # ExpatFactory uses bookeeping attribute
             member = getattr(py_obj,membname)
-            if type(member) == InstanceType:
+            if type(member) == object:
                 descript += '\n'+(' '*level)+'{'+membname+'}\n'
                 descript += pyobj_printer(member, level+3)
             elif type(member) == list:

@@ -85,7 +85,7 @@ class XML_Indexer(indexer.PreferredIndexer, indexer.TextSplitter):
                 if membname in ("__parent__","_seq"):  # ditto, Uche
                    continue     # ExpatFactory uses bookeeping attributes
                 member = getattr(currnode, membname)
-                if type(member) is InstanceType:
+                if type(member) is object:
                     xpath = xpath_suffix+'/'+membname
                     self.recurse_nodes(member, xpath.encode('UTF-8'))
                 elif type(member) is list:

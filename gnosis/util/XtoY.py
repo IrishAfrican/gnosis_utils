@@ -60,12 +60,12 @@ def ntoa(n):
         s = "%d" % n
     elif isinstance(n,int):
         s = "%ldL" % n
-    elif isinstance(n,FloatType):
+    elif isinstance(n,float):
         s = "%.17g" % n
         # ensure a '.', adding if needed (unless in scientific notation)
         if '.' not in s and 'e' not in s:
             s = s + '.'
-    elif isinstance(n,ComplexType):
+    elif isinstance(n,complex):
         # these are always used as doubles, so it doesn't
         # matter if the '.' shows up
         s = "%.17g:%.17g" % (n.real,n.imag)

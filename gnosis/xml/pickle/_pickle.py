@@ -36,9 +36,9 @@ except:
 
 # default settings
 setInBody(int,0)
-setInBody(FloatType,0)
+setInBody(float,0)
 setInBody(int,0)
-setInBody(ComplexType,0)
+setInBody(complex,0)
 setInBody(bytes,0)
 # our unicode vs. "regular string" scheme relies on unicode
 # strings only being in the body, so this is hardcoded.
@@ -79,7 +79,7 @@ class StreamWriter:
             self.iohandle = gzip.GzipFile(None,'wb',9,self.iohandle)
 
     def append(self,item):
-        if type(item) in (list, TupleType): item = ''.join(item)
+        if type(item) in (list, tuple): item = ''.join(item)
         self.iohandle.write(item)
 
     def getvalue(self):
@@ -295,10 +295,10 @@ def pickle_instance(obj, list, level=0, deepcopy=0):
     # decide how to save the "stuff", depending on whether we need
     # to later grab it back as a single object
     if not hasattr(obj,'__setstate__'):
-        if type(stuff) is DictType:
+        if type(stuff) is dict:
             # don't need it as a single object - save keys/vals as
             # first-level attributes
-            for key,val in list(stuff.items()):
+            for key,val in stuff.items():
                 list.append(_attr_tag(key, val, level, deepcopy))
         else:
             raise XMLPicklingError("__getstate__ must return a DictType here")
@@ -401,12 +401,12 @@ def _tag_completer(start_tag, orig_thing, close_tag, level, deepcopy):
     (mtag,thing,in_body,mextra) = try_mutate(orig_thing,None,
                                              getInBody(type(orig_thing)), None)
 
-    if type(thing) is NoneType:
+    if type(thing) is type(None):
         start_tag = start_tag + "%s />\n" % (_family_type('none','None',None,None))
         close_tag = ''
     # bool cannot be used as a base class (see sanity check above) so if thing
     # is a bool it will always be BooleanType, and either True or False
-    elif Have_BoolClass and type(thing) is BooleanType:
+    elif Have_BoolClass and type(thing) is bool:
         if thing is True:
             typestr = 'True'
         else: # must be False
@@ -425,7 +425,7 @@ def _tag_completer(start_tag, orig_thing, close_tag, level, deepcopy):
     # ClassType will get caught by isInstanceLike(), which is not
     # what we want. There are two cases here - the first catches
     # old-style classes, the second catches new-style classes.
-    elif isinstance(thing,ClassType) or isNewStyleClass(thing):
+    elif isinstance(thing, type) or isNewStyleClass(thing):
         module = thing.__module__
         if module:
             extra = 'module="%s" class="%s"' % (module, thing.__name__)
@@ -454,7 +454,7 @@ def _tag_completer(start_tag, orig_thing, close_tag, level, deepcopy):
             pickle_instance(thing, tag_body, level+1, deepcopy)
         else:
             close_tag = ''
-    elif isinstance_any(thing, (int, int, FloatType, ComplexType)):
+    elif isinstance_any(thing, (int, int, float, complex)):
         #thing_str = repr(thing)
         thing_str = ntoa(thing)
 
@@ -520,7 +520,7 @@ def _tag_completer(start_tag, orig_thing, close_tag, level, deepcopy):
     #	   before pickling subitems, in case it contains self-references
     #	   (we CANNOT just move the visited{} update to the top of this
     #	   function, since that would screw up every _family_type() call)
-    elif type(thing) is TupleType:
+    elif type(thing) is tuple:
         start_tag, do_copy = \
                    _tag_compound(start_tag,_family_type('seq','tuple',mtag,mextra),
                                  orig_thing,deepcopy)
@@ -540,7 +540,7 @@ def _tag_completer(start_tag, orig_thing, close_tag, level, deepcopy):
                 tag_body.append(_item_tag(item, level+1, deepcopy))
         else:
             close_tag = ''
-    elif type(thing) in [DictType]:
+    elif type(thing) in [dict]:
         start_tag, do_copy = \
                    _tag_compound(start_tag,_family_type('map','dict',mtag,mextra),
                                  orig_thing,deepcopy)

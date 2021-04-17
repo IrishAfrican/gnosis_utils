@@ -53,7 +53,7 @@ test_list( ol, 'isInstanceLike', insp.isInstanceLike)
 from types import *
 
 def is_oldclass(o):
-    if isinstance(o,ClassType):
+    if isinstance(o, type):
         return 1
     else:
         return 0

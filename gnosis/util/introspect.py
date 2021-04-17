@@ -34,7 +34,7 @@ def isinstance_any(o, types):
 
 isContainer	 = lambda o: isinstance_any(o, containers)
 isSimpleType = lambda o: isinstance_any(o, simpletypes)
-isInstance	 = lambda o: type(o) is InstanceType
+isInstance	 = lambda o: type(o) is object
 isImmutable	 = lambda o: isinstance_any(o, immutabletypes)
 
 if gnosis.pyconfig.Have_ObjectClass():	
