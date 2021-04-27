@@ -1,6 +1,6 @@
 from gnosis.xml.pickle.util import subnodes, _EmptyClass, unsafe_string, \
      unsafe_content, safe_eval, obj_from_name, unpickle_function, \
-     get_class_from_name
+     string_literal, get_class_from_name
 from gnosis.util.introspect import attr_update
 from types import *
 import gnosis.xml.pickle.ext as mutate
@@ -282,7 +282,7 @@ def _thing_from_dom(dom_node, container=None, paranoia=1):
                 #node_val = safe_eval(node_val)
                 node_val = to_number(node_val)
             elif node_type == 'string':
-                node_val = node_val
+                node_val = string_literal(node_val)
             elif node_type == 'list':
                 node_val = node_val
             elif node_type == 'tuple':

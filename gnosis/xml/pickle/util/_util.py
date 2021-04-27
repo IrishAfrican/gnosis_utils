@@ -227,9 +227,10 @@ def safe_content(s):
 
     # wrap "regular" python strings as unicode
     if isinstance(s, bytes):
-        s = "\xbb\xbb%s\xab\xab" % s
-
-    return s.encode('utf-8')
+        # s = "\xbb\xbb%s\xab\xab" % s
+        return s.encode('utf-8')
+    else:
+        return s
 
 def unsafe_content(s):
     """Take the string returned by safe_content() and recreate the
@@ -240,6 +241,12 @@ def unsafe_content(s):
     if s[:2]==chr(187)*2 and s[-2:]==chr(171)*2:
         s = s[2:-2].encode('us-ascii')
 
+    return s
+
+def string_literal(s):
+    if s[:2]=="b'" and s[-1:]=="'":
+        s = s[2:-1]
+    
     return s
 
 def subnodes(node):
