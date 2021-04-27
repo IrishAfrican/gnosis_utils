@@ -226,11 +226,11 @@ def safe_content(s):
     s = s.replace('>', '&gt;')
 
     # wrap "regular" python strings as unicode
-    if isinstance(s, bytes):
+    #if isinstance(s, bytes):
         # s = "\xbb\xbb%s\xab\xab" % s
-        return s.encode('utf-8')
-    else:
-        return s
+    #    return s.encode('utf-8')
+    #else:
+    return s
 
 def unsafe_content(s):
     """Take the string returned by safe_content() and recreate the
